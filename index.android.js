@@ -3,6 +3,8 @@
  * https://github.com/facebook/react-native
  * @flow
  */
+var React = require('react-native');
+var SQLite = require('react-native-sqlite-storage')
 
 import React, { Component } from 'react';
 import {
@@ -11,16 +13,24 @@ import {
   Text,
   View
 } from 'react-native';
-import Example from './Example';
 import Login from './src/Components/Login/Login'
+
+
 export default class ReactNativeProject extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      record: null
+    }
+                                                                                              
+    let db = SQLite.openDatabase({name: 'example.db', createFromLocation : "~example.openDatabase", location: 'Library'}, this.openCB, this.errorCB);
+    console.log(db);
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-       
-        <Example />
-        <Login />
-      </View>
+      <Login />
     );
   }
 }
