@@ -3,8 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-var React = require('react-native');
-var SQLite = require('react-native-sqlite-storage')
+
 
 import React, { Component } from 'react';
 import {
@@ -13,26 +12,35 @@ import {
   Text,
   View
 } from 'react-native';
-import Login from './src/Components/Login/Login'
 
+import {
+  StackNavigator,
+} from 'react-navigation';
+
+import Login from './src/Components/Login/Login';
+import Index from './app/Index';
+
+const App = StackNavigator({
+  Main: {screen: MainScreen},
+  Profile: {screen: ProfileScreen},
+});
+
+let SQLite = require('react-native-sqlite-storage');
 
 export default class ReactNativeProject extends Component {
+  static navigationOptions = {
+    title: 'Welcome',
+  };
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      record: null
-    }
-                                                                                              
-    let db = SQLite.openDatabase({name: 'example.db', createFromLocation : "~example.openDatabase", location: 'Library'}, this.openCB, this.errorCB);
-    console.log(db);
-  }
-
-  render() {
+  const  navigate  = this.props.navigation;
     return (
-      <Login />
+      <Button
+        title="Go to Jane's profile"
+        onPress={() =>
+          navigate('Profile', { name: 'Jane' });
+        }
+      />
     );
-  }
 }
 
 const styles = StyleSheet.create({
