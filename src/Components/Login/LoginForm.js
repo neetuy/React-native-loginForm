@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Actions } from 'react-native-router-flux'
+
 
 import {
    View,
@@ -9,13 +11,17 @@ import {
 } from 'react-native'
 
 export default LoginForm = (props) => {
+  const goToHome = () => {
+      Actions.home()
+   }
    return (
       <View style = {styles.container}>
          <TextInput
             style = {styles.input}
             placeholder = 'Email'
             autoCapitalize = 'none'
-            onChangeText = {props.updateEmail}
+            // onChangeText = {props.updateEmail}
+            onChangeText = {props.setData}
          />
          <TextInput
             style = {styles.input}
@@ -23,11 +29,13 @@ export default LoginForm = (props) => {
             autoCapitalize = 'none'
             onChangeText = {props.updatePassword}
          />
+         
          <TouchableHighlight
             style = {styles.buttonContainer}
-            onPress = { () => props.login(props.email, props.password)}>
+            onPress = {props.getData}
+            >
             <Text style = {styles.buttonText}>
-               Submit
+              Login
             </Text>
          </TouchableHighlight>
       </View>
@@ -41,6 +49,7 @@ const styles = StyleSheet.create({
   },
   input:{
     height:40,
+    color: '#fff',
     backgroundColor: 'rgba(255,255,255,0.2)',
     marginBottom: 40,
     paddingHorizontal: 10,

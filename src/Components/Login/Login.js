@@ -1,14 +1,16 @@
 
 import React, { Component } from 'react'
-import { View, Image, Text, StyleSheet } from 'react-native'
+import { View, Image, Text, StyleSheet, AsyncStorage } from 'react-native'
 import LoginForm from './LoginForm';
+
 
 export default class Login extends Component {
    constructor() {
       super()
       this.state = {
          email: '',
-         password: ''
+         password: '',
+          'data': ''
       }
    }
    updateEmail = (text) => {
@@ -20,9 +22,16 @@ export default class Login extends Component {
    login = () => {
       alert('email: ' + this.state.email + ' password: ' + this.state.password)
    }
-     goToHome = () => {
-      Actions.home()
+    setData = (value) => {
+      AsyncStorage.setItem('someBoolean', JSON.stringify(value))
    }
+   getData = (value) => {
+      AsyncStorage.getItem('someBoolean', function (err, value) {
+       var data = JSON.parse(value); // boolean false
+       alert(data);
+      });
+   }
+   
    render(){
       return(
         <View style={styles.wrapper}>
@@ -35,11 +44,12 @@ export default class Login extends Component {
           </View>
           <View>
             <LoginForm
-               updateEmail = {this.updateEmail}
-               updatePassword = {this.updatePassword}
-               login = {this.login}
-               goToHome ={this.gotoHome}
-
+              updateEmail = {this.updateEmail}
+              updatePassword = {this.updatePassword}
+              login = {this.login}
+              data = {this.state.data}
+              setData = {this.setData}
+              getData = {this.getData}
             />
           </View>  
         </View>
@@ -66,7 +76,8 @@ const styles = StyleSheet.create ({
   },
   logo: {
     width: 100,
-    height: 100
+    height: 100,
+    fontSize: 20
   },
   title: {
     color: '#fff',
