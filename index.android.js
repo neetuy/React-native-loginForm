@@ -3,54 +3,49 @@
  * https://github.com/facebook/react-native
  * @flow
  */
+// import React, { Component } from 'react';
+// import {
+//   AppRegistry,
+//   Alert,
+// } from 'react-native';
+// import Login from './src/Components/Login/Login';
 
+// // import ReactNativeLogin from './App/components/App';
 
-import React, { Component } from 'react';
+// class ReactNativeProject extends Component {
+
+	
+
+//   render(){
+//     return (
+//       <Login
+       
+//       />
+//     );
+//   }
+// }
+
+// AppRegistry.registerComponent('ReactNativeProject', () =>ReactNativeProject);
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View
+  Alert,
 } from 'react-native';
 
-import {
-  StackNavigator,
-} from 'react-navigation';
-
+import React, { Component } from 'react'
+import { View } from 'react-native'
 import Login from './src/Components/Login/Login';
-import Index from './app/Index';
-
-const App = StackNavigator({
-  Main: {screen: MainScreen},
-  Profile: {screen: ProfileScreen},
-});
-
-let SQLite = require('react-native-sqlite-storage');
+import Routes from './src/Components/routes/Routes';
 
 export default class ReactNativeProject extends Component {
-  static navigationOptions = {
-    title: 'Welcome',
-  };
+   
+   render(){
+      return(
+      	
+	            <Login 
+	            />
 
-  const  navigate  = this.props.navigation;
-    return (
-      <Button
-        title="Go to Jane's profile"
-        onPress={() =>
-          navigate('Profile', { name: 'Jane' });
-        }
-      />
-    );
+      )
+   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  }
-  
-});
-
-AppRegistry.registerComponent('ReactNativeProject', () => ReactNativeProject);
+	AppRegistry.registerComponent('ReactNativeProject', () =>ReactNativeProject);

@@ -1,34 +1,37 @@
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  TouchableOpacity
-} from 'react-native';
+import React, { Component } from 'react'
 
-export default class LoginForm extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <TextInput
-        placeholder='username or email' 
-        placeholderTextColor='rgba(255,255,255,0.7)'
-        style={styles.input} 
-        />
-        <TextInput 
-        placeholder='password'
-        placeholderTextColor='rgba(255,255,255,0.7)'
-        secureTextEntry
-        style={styles.input} 
-        />
-        <TouchableOpacity style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>LOGIN</Text>
-        </TouchableOpacity>
+import {
+   View,
+   Text,
+   TouchableHighlight,
+   TextInput,
+   StyleSheet
+} from 'react-native'
+
+export default LoginForm = (props) => {
+   return (
+      <View style = {styles.container}>
+         <TextInput
+            style = {styles.input}
+            placeholder = 'Email'
+            autoCapitalize = 'none'
+            onChangeText = {props.updateEmail}
+         />
+         <TextInput
+            style = {styles.input}
+            placeholder = 'Password'
+            autoCapitalize = 'none'
+            onChangeText = {props.updatePassword}
+         />
+         <TouchableHighlight
+            style = {styles.buttonContainer}
+            onPress = { () => props.login(props.email, props.password)}>
+            <Text style = {styles.buttonText}>
+               Submit
+            </Text>
+         </TouchableHighlight>
       </View>
-    );
-  }
+   )
 }
 
 
@@ -53,3 +56,4 @@ const styles = StyleSheet.create({
     fontWeight: '800'
   }
 });
+
