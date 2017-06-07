@@ -41,7 +41,8 @@ export default class ReactNativeProject extends Component {
    
    render(){
       return(
-	            <Login />
+	            // <Login />
+              <Routes />
       )
    }
 }

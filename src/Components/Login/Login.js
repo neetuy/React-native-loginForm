@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { View, Image, Text, StyleSheet, AsyncStorage } from 'react-native'
 import LoginForm from './LoginForm';
+import { Actions } from 'react-native-router-flux'
 
 
 export default class Login extends Component {
@@ -12,11 +13,12 @@ export default class Login extends Component {
          password: '',
           'data': ''
       }
+      // this.submit = this.submit.bind(this);
    }
-   updateEmail = (text) => {
+    updateEmail = (text) => {
       this.setState({email: text})
    }
-   updatePassword = (text) => {
+    updatePassword = (text) => {
       this.setState({password: text})
    }
    login = () => {
@@ -31,7 +33,19 @@ export default class Login extends Component {
        alert(data);
       });
    }
-   
+   submit = () => {
+    const goToHome = () => {
+      Actions.home()  
+    }
+     // this.setState({email: text})
+     if (this.state.email != 'abc123@gmail.com') {
+      alert('wrong email');
+    } 
+    else{
+     goToHome();
+    }
+
+  }
    render(){
       return(
         <View style={styles.wrapper}>
@@ -50,6 +64,7 @@ export default class Login extends Component {
               data = {this.state.data}
               setData = {this.setData}
               getData = {this.getData}
+              submit = {this.submit}
             />
           </View>  
         </View>

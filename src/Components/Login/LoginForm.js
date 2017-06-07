@@ -20,19 +20,20 @@ export default LoginForm = (props) => {
             style = {styles.input}
             placeholder = 'Email'
             autoCapitalize = 'none'
-            // onChangeText = {props.updateEmail}
-            onChangeText = {props.setData}
+            onChangeText = {props.updateEmail}
+            // onChangeText = {props.setData}
          />
          <TextInput
             style = {styles.input}
             placeholder = 'Password'
             autoCapitalize = 'none'
             onChangeText = {props.updatePassword}
+            
          />
          
          <TouchableHighlight
             style = {styles.buttonContainer}
-            onPress = {props.getData}
+            onPress = {props.submit}
             >
             <Text style = {styles.buttonText}>
               Login
