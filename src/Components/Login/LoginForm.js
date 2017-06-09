@@ -21,7 +21,6 @@ export default LoginForm = (props) => {
             placeholder = 'Email'
             autoCapitalize = 'none'
             onChangeText = {props.updateEmail}
-            // onChangeText = {props.setData}
          />
          <TextInput
             style = {styles.input}

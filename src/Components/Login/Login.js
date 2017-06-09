@@ -14,37 +14,59 @@ export default class Login extends Component {
           'data': ''
       }
       // this.submit = this.submit.bind(this);
-   }
-    updateEmail = (text) => {
-      this.setState({email: text})
-   }
-    updatePassword = (text) => {
-      this.setState({password: text})
-   }
-   login = () => {
-      alert('email: ' + this.state.email + ' password: ' + this.state.password)
-   }
-    setData = (value) => {
-      AsyncStorage.setItem('someBoolean', JSON.stringify(value))
-   }
-   getData = (value) => {
-      AsyncStorage.getItem('someBoolean', function (err, value) {
-       var data = JSON.parse(value); // boolean false
-       alert(data);
+    }
+    updateEmail = (value) => {
+      AsyncStorage.setItem('email', JSON.stringify(value))
+      this.setState({email: value})
+    }
+    updatePassword = (value) => {
+      this.setState({password: value})
+      AsyncStorage.setItem('password', JSON.stringify(value))
+    }
+     // login = () => {
+     //    alert('email: ' + this.state.email + ' password: ' + this.state.password)
+     // }
+    deleteItem = (value) => {
+      var email = this.state.email;
+      var password = this.state.password;
+      AsyncStorage.removeItem('email').then((value) => {
+         this.setState({email: value});
+         var email = JSON.parse(value); // boolean false
+        alert(email);
       });
-   }
+      AsyncStorage.removeItem('password').then((value) => {
+         this.setState({password: value});
+         var data = JSON.parse(value); // boolean false
+        alert(password);
+      });
+
+    }
    submit = () => {
+    email=this.state.email;
+    password=this.state.password;
     const goToHome = () => {
       Actions.home()  
     }
-     // this.setState({email: text})
-     if (this.state.email != 'abc123@gmail.com') {
-      alert('wrong email');
+    getData = (value) => {
+      AsyncStorage.getItem('email').then((value) => {
+        this.setState({email: value});
+        var email = JSON.parse(value); // boolean false
+        alert(email);
+      });
+      AsyncStorage.getItem('password').then((value) => {
+        this.setState({password: value});
+        var password = JSON.parse(value); // boolean false
+        alert(password);
+      });
+
+    }
+     if (email != 'abc123@gmail.com' || password !='abc123') {
+      alert('wrong email & password');
     } 
     else{
-     goToHome();
+      getData()
+      goToHome()
     }
-
   }
    render(){
       return(
@@ -62,8 +84,6 @@ export default class Login extends Component {
               updatePassword = {this.updatePassword}
               login = {this.login}
               data = {this.state.data}
-              setData = {this.setData}
-              getData = {this.getData}
               submit = {this.submit}
             />
           </View>  
